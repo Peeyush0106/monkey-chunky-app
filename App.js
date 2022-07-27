@@ -10,7 +10,6 @@ export default class App extends React.Component {
 		super();
 		this.state = {
 			word: "",
-			displayWord: "",
 			chunks: []
 		};
 	}
@@ -30,24 +29,26 @@ export default class App extends React.Component {
 						value={this.state.word}
 					/>
 					<TouchableOpacity style={styles.goBtn} onPress={() => {
-						this.setState({ chunks: DB[this.state.word].chunks });
-						console.log(this.state.chunks);
+						this.setState({chunks: DB[this.state.word].chunks});
+						console.log(this.state.chunks, DB[this.state.word].chunks);
 					}}>
 						<Text style={{ textAlign: "center" }}>
 							Go
 						</Text>
 					</TouchableOpacity>
 					<View>
+						{console.log(this.state.chunks)}
 						{
-						this.state.chunks.map(({item}) => {
-							return (
-								<TouchableOpacity style={styles.goBtn} onPress={}>
-									<Text>
-										{item}
-									</Text>
-								</TouchableOpacity>
-							)
-						})
+							this.state.chunks.map(item => {
+								return (
+									<TouchableOpacity style={styles.chunkButton}>
+										{
+											<Text>
+												{item}
+											</Text>}
+									</TouchableOpacity>
+								)
+							})
 						}
 					</View>
 				</View>
@@ -77,5 +78,15 @@ const styles = StyleSheet.create({
 		alignSelf: "center",
 		marginTop: "20%",
 		backgroundColor: "lightgreen"
+	},
+	chunkButton:{
+	  width: '60%',
+	  height: 50,
+	  justifyContent: 'center',
+	  alignItems: 'center',
+	  alignSelf: 'center',
+	  borderRadius: 10,
+	  margin: 5,
+	  backgroundColor: 'red'
 	}
 });
